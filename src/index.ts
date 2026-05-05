@@ -1,0 +1,5 @@
+export { createDrawEmptyPlugin, default } from './plugin'
+export type { DrawEmptyPluginOptions } from './plugin'
+export { drawEmptyDefaultAccentKey } from './injection'
+export { default as DrawEmpty } from './components/DrawEmpty.vue'
+export { default as UndrawImg } from './components/UndrawImg.vue'

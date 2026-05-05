@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+  <!-- 图形贴近 viewBox，避免导出后显得过小 -->
+  <rect x="7.25" y="8.75" width="23.5" height="18.5" rx="4.25" fill="#2563EB" opacity="0.09"/>
+  <rect x="4.625" y="6.125" width="23.5" height="18.5" rx="4.25" fill="#2563EB" opacity="0.15"/>
+  <rect x="2" y="3.5" width="23.5" height="18.5" rx="4.25" fill="#EFF6FF" stroke="#2563EB" stroke-width="2.25"/>
+  <path d="M7.25 15.25 Q16 20.15 24.75 15.25" stroke="#2563EB" stroke-width="2.15" stroke-linecap="round" fill="none" opacity="0.38"/>
+</svg>

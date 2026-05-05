@@ -1,0 +1,966 @@
+/* 仅在默认主题变量上做少量收敛，避免额外 CSS 框架 */
+
+:root {
+  --vp-layout-max-width: 1360px;
+
+  /*
+   * 侧栏：接近 Element Plus 文档观感——默认宽度略宽裕、与正文同底色（无「灰条分区」），仅靠留白分隔。
+   */
+  --vp-sidebar-width: 272px;
+  --vp-sidebar-bg-color: var(--vp-c-bg);
+
+  /* illus 产品主色：与 UndrawImg accent 基准色 #2563eb / unDraw #6c63ff 同一谱系 */
+  --illus-brand: #2563eb;
+  --illus-brand-hover: #3b82f6;
+  --illus-brand-active: #1d4ed8;
+  --illus-brand-soft-bg: #eff6ff;
+  --illus-brand-rgb: 37, 99, 235;
+
+  --vp-c-brand-1: var(--illus-brand);
+  --vp-c-brand-2: var(--illus-brand-active);
+  --vp-c-brand-3: var(--illus-brand-hover);
+  --vp-c-brand-soft: rgba(var(--illus-brand-rgb), 0.14);
+  --vp-nav-logo-height: 36px;
+}
+
+.dark {
+  --vp-sidebar-bg-color: var(--vp-c-bg);
+
+  --illus-brand: #3b82f6;
+  --illus-brand-hover: #60a5fa;
+  --illus-brand-active: #2563eb;
+  --illus-brand-soft-bg: rgba(59, 130, 246, 0.1);
+  --illus-brand-rgb: 59, 130, 246;
+
+  --vp-c-brand-1: var(--illus-brand);
+  --vp-c-brand-2: var(--illus-brand-hover);
+  --vp-c-brand-3: #93c5fd;
+  --vp-c-brand-soft: rgba(var(--illus-brand-rgb), 0.22);
+}
+
+/*
+ * 滚动条：只对「窗口」生效，不用全局 *。
+ * 之前给所有元素套 webkit 滚动条 + 品牌色，容易变得又粗又抢眼（与您截图一致）。
+ */
+html {
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.55) transparent;
+}
+
+html::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 163, 184, 0.45);
+  border-radius: 999px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(100, 116, 139, 0.55);
+}
+
+html::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.dark html {
+  scrollbar-color: rgba(100, 116, 139, 0.5) transparent;
+}
+
+.dark html::-webkit-scrollbar-thumb {
+  background-color: rgba(71, 85, 105, 0.55);
+}
+
+.dark html::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(100, 116, 139, 0.65);
+}
+
+/* ----- 首页 ----- */
+
+/*
+ * 仅首页（frontmatter.pageClass: drawe-home）：拉满 VPContent 下可用宽度。
+ * 不要用全局 .VPDoc:not(.has-sidebar)，否则会误伤其它无侧栏文档页。
+ */
+.Layout.drawe-home {
+  --vp-layout-max-width: 100%;
+}
+
+/* 避免 VPContent flex-grow:1 把文档区撑满视窗后，底部出现大块 #fafafa 留白 */
+.Layout.drawe-home .VPContent {
+  flex-grow: 0;
+}
+
+.Layout.drawe-home .VPDoc {
+  /* 主题默认 padding-top 32~48px，与 Hero 自身上边距叠加会显得「导航下一大块空白」 */
+  padding-top: 0 !important;
+  padding-left: clamp(16px, 3vw, 40px);
+  padding-right: clamp(16px, 3vw, 40px);
+  padding-bottom: 0 !important;
+  background-color: #fafafa;
+}
+
+.dark .Layout.drawe-home .VPDoc {
+  background-color: var(--vp-c-bg);
+}
+
+.Layout.drawe-home .VPDoc .container {
+  max-width: none !important;
+  width: 100%;
+}
+
+.Layout.drawe-home .VPDoc:not(.has-sidebar) .content,
+.Layout.drawe-home .VPDoc:not(.has-sidebar) .content-container {
+  max-width: none !important;
+  width: 100%;
+}
+
+/* 主题默认 .content { padding-bottom: 128px }（≥960px），首页自定义页脚会被顶出一大块空白 */
+.Layout.drawe-home .VPDoc:not(.has-sidebar) .content {
+  padding-bottom: 0 !important;
+}
+
+.Layout.drawe-home .VPDoc .main,
+.Layout.drawe-home .VPDoc .vp-doc {
+  width: 100%;
+  max-width: none;
+}
+
+@media (min-width: 960px) {
+  .Layout.drawe-home .VPDoc:not(.has-sidebar) .container {
+    display: block;
+  }
+
+  .Layout.drawe-home .VPDoc:not(.has-sidebar) .content {
+    max-width: none !important;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+/* Hero：全宽浅色带 + 宽屏左右分栏（文案 / 品牌图形），窄屏上图下文 */
+.ep-home.home {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.ep-hero {
+  position: relative;
+  margin-left: calc(-1 * clamp(16px, 3vw, 40px));
+  margin-right: calc(-1 * clamp(16px, 3vw, 40px));
+  margin-bottom: 2rem;
+  padding: clamp(2.75rem, 7vw, 4.75rem) clamp(16px, 3vw, 40px) clamp(2.25rem, 5vw, 3.75rem);
+  overflow: hidden;
+}
+
+.ep-hero__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 85% 75% at 88% 8%, rgba(var(--illus-brand-rgb), 0.18) 0%, transparent 52%),
+    radial-gradient(ellipse 50% 40% at 8% 85%, rgba(var(--illus-brand-rgb), 0.06) 0%, transparent 48%),
+    linear-gradient(165deg, var(--illus-brand-soft-bg) 0%, #f8fafc 42%, #fafafa 100%);
+  border-bottom: 1px solid #ebeef5;
+}
+
+.dark .ep-hero__bg {
+  background:
+    radial-gradient(ellipse 85% 75% at 88% 8%, rgba(var(--illus-brand-rgb), 0.22) 0%, transparent 52%),
+    linear-gradient(165deg, var(--vp-c-bg-soft) 0%, var(--vp-c-bg) 100%);
+  border-bottom-color: var(--vp-c-divider);
+}
+
+.ep-hero__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 3rem);
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    'visual'
+    'copy';
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.ep-hero__copy {
+  grid-area: copy;
+}
+
+.ep-hero__visual {
+  grid-area: visual;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+
+.ep-hero__visual-ring {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  translate: -50% -50%;
+  width: min(92%, 380px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(var(--illus-brand-rgb), 0.06) 0%,
+    rgba(var(--illus-brand-rgb), 0.02) 48%,
+    transparent 74%
+  );
+  pointer-events: none;
+}
+
+.dark .ep-hero__visual-ring {
+  background: radial-gradient(
+    circle,
+    rgba(var(--illus-brand-rgb), 0.1) 0%,
+    rgba(var(--illus-brand-rgb), 0.03) 44%,
+    transparent 70%
+  );
+}
+
+.ep-hero__visual-panel {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 360px;
+  margin-inline: auto;
+  padding: clamp(2rem, 6vw, 3.5rem);
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(var(--illus-brand-rgb), 0.07);
+  background:
+    radial-gradient(ellipse 95% 75% at 72% 18%, rgba(var(--illus-brand-rgb), 0.1) 0%, transparent 58%),
+    radial-gradient(ellipse 55% 45% at 12% 88%, rgba(var(--illus-brand-rgb), 0.035) 0%, transparent 52%),
+    linear-gradient(168deg, rgba(255, 255, 255, 0.88) 0%, #f4f8ff 50%, rgba(239, 246, 255, 0.78) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    0 10px 32px -22px rgba(var(--illus-brand-rgb), 0.16);
+}
+
+.dark .ep-hero__visual-panel {
+  background:
+    radial-gradient(ellipse 95% 72% at 70% 16%, rgba(var(--illus-brand-rgb), 0.18) 0%, transparent 55%),
+    linear-gradient(168deg, var(--vp-c-bg-soft) 0%, rgba(30, 41, 59, 0.58) 100%);
+  border-color: rgba(var(--illus-brand-rgb), 0.14);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 10px 32px -22px rgba(0, 0, 0, 0.35);
+}
+
+.ep-hero__visual-deco {
+  position: absolute;
+  inset: -15%;
+  opacity: 0.52;
+  pointer-events: none;
+  background-image: radial-gradient(
+    rgba(var(--illus-brand-rgb), 0.09) 0.6px,
+    transparent 0.6px
+  );
+  background-size: 13px 13px;
+  mask-image: radial-gradient(ellipse 72% 72% at 50% 48%, black 18%, transparent 76%);
+}
+
+.dark .ep-hero__visual-deco {
+  opacity: 0.28;
+}
+
+.ep-hero__logo--feature {
+  position: relative;
+  z-index: 1;
+  width: clamp(88px, 22vw, 120px);
+  height: auto;
+  flex-shrink: 0;
+  opacity: 0.9;
+  filter:
+    saturate(0.76) brightness(1.03)
+    drop-shadow(0 5px 16px rgba(var(--illus-brand-rgb), 0.1));
+}
+
+.dark .ep-hero__logo--feature {
+  opacity: 0.88;
+  filter:
+    saturate(0.82) brightness(1.06)
+    drop-shadow(0 5px 18px rgba(0, 0, 0, 0.22));
+}
+
+@media (min-width: 960px) {
+  .ep-hero__inner {
+    grid-template-columns: minmax(0, 1.05fr) minmax(300px, 1fr);
+    grid-template-areas: 'copy visual';
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+
+  .Layout.drawe-home .ep-hero .ep-hero__visual {
+    justify-content: flex-end;
+    align-self: stretch;
+    padding-right: clamp(0, 1.5vw, 20px);
+  }
+
+  .ep-hero__visual-panel {
+    margin-left: auto;
+    margin-right: 0;
+    max-width: min(100%, 400px);
+    min-height: clamp(220px, 30vh, 320px);
+  }
+
+  .ep-hero__logo--feature {
+    width: clamp(120px, 12vw, 160px);
+  }
+
+  .Layout.drawe-home .ep-hero .ep-hero__copy {
+    text-align: left;
+  }
+
+  .Layout.drawe-home .ep-hero .ep-hero__lead {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .Layout.drawe-home .ep-hero .ep-hero__actions {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 959px) {
+  .Layout.drawe-home .ep-hero {
+    text-align: center;
+  }
+
+  .Layout.drawe-home .ep-hero .ep-hero__lead {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .Layout.drawe-home .ep-hero .ep-hero__actions {
+    justify-content: center;
+  }
+}
+
+.ep-hero__badge {
+  display: inline-block;
+  margin: 0 0 1rem;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--illus-brand);
+  background: rgba(var(--illus-brand-rgb), 0.1);
+  border: 1px solid rgba(var(--illus-brand-rgb), 0.28);
+  border-radius: 100px;
+}
+
+.dark .ep-hero__badge {
+  background: rgba(var(--illus-brand-rgb), 0.18);
+  border-color: rgba(var(--illus-brand-rgb), 0.38);
+  color: var(--illus-brand-hover);
+}
+
+.ep-hero__headline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.45rem 1rem;
+  margin: 0.65rem 0 0;
+}
+
+.ep-hero__headline .ep-hero__title {
+  margin: 0;
+}
+
+.ep-hero__pkg--hero {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 0.38em 0.78em;
+  border-radius: 8px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: 0.03em;
+  background: var(--vp-code-bg);
+  color: var(--vp-c-text-2);
+  border: 1px solid rgba(var(--illus-brand-rgb), 0.14);
+}
+
+.dark .ep-hero__pkg--hero {
+  border-color: rgba(var(--illus-brand-rgb), 0.28);
+}
+
+@media (max-width: 959px) {
+  .ep-hero__headline {
+    justify-content: center;
+  }
+}
+
+.ep-hero__title {
+  margin: 0;
+  font-size: clamp(2.35rem, 5vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: #303133;
+}
+
+.ep-hero__title--brand {
+  letter-spacing: 0.06em;
+}
+
+.dark .ep-hero__title {
+  color: var(--vp-c-text-1);
+}
+
+.ep-hero__lead {
+  margin: 1.05rem 0 0;
+  max-width: min(40rem, 100%);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.68;
+  color: #606266;
+}
+
+.dark .ep-hero__lead {
+  color: var(--vp-c-text-2);
+}
+
+.ep-hero__lead strong {
+  color: #303133;
+  font-weight: 600;
+}
+
+.dark .ep-hero__lead strong {
+  color: var(--vp-c-text-1);
+}
+
+.ep-hero__lead-muted {
+  font-weight: 400;
+  color: #909399;
+}
+
+.dark .ep-hero__lead-muted {
+  color: var(--vp-c-text-3);
+}
+
+.ep-hero__lead code {
+  font-size: 0.88em;
+  padding: 0.14em 0.42em;
+  border-radius: 4px;
+  background: var(--vp-code-bg);
+  color: var(--vp-c-text-2);
+}
+
+.ep-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 1.65rem;
+}
+
+.ep-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none !important;
+  border-radius: 4px;
+  transition:
+    color 0.2s,
+    border-color 0.2s,
+    background-color 0.2s;
+}
+
+.ep-btn:active {
+  transform: scale(0.98);
+}
+
+/* VitePress `.vp-doc a { color: brand }`：主按钮需强制白字 */
+.Layout.drawe-home .vp-doc .home a.ep-btn--primary,
+.Layout.drawe-home .vp-doc .home a.ep-btn--primary:visited {
+  border: 1px solid var(--illus-brand) !important;
+  color: #ffffff !important;
+  background-color: var(--illus-brand) !important;
+  background-image: none !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.Layout.drawe-home .vp-doc .home a.ep-btn--primary:hover {
+  border-color: var(--illus-brand-hover) !important;
+  background-color: var(--illus-brand-hover) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.dark .Layout.drawe-home .vp-doc .home a.ep-btn--primary,
+.dark .Layout.drawe-home .vp-doc .home a.ep-btn--primary:visited {
+  border-color: var(--illus-brand) !important;
+  background-color: var(--illus-brand) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.dark .Layout.drawe-home .vp-doc .home a.ep-btn--primary:hover {
+  border-color: var(--illus-brand-hover) !important;
+  background-color: var(--illus-brand-active) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.Layout.drawe-home .vp-doc .home a.ep-btn--default,
+.Layout.drawe-home .vp-doc .home a.ep-btn--default:visited {
+  border: 1px solid #dcdfe6 !important;
+  color: #606266 !important;
+  background-color: #ffffff !important;
+  background-image: none !important;
+  -webkit-text-fill-color: #606266 !important;
+}
+
+.Layout.drawe-home .vp-doc .home a.ep-btn--default:hover {
+  border-color: var(--illus-brand) !important;
+  color: var(--illus-brand) !important;
+  background-color: var(--illus-brand-soft-bg) !important;
+  -webkit-text-fill-color: var(--illus-brand) !important;
+}
+
+.dark .Layout.drawe-home .vp-doc .home a.ep-btn--default,
+.dark .Layout.drawe-home .vp-doc .home a.ep-btn--default:visited {
+  border-color: var(--vp-c-divider) !important;
+  color: var(--vp-c-text-2) !important;
+  background-color: var(--vp-c-bg-soft) !important;
+  -webkit-text-fill-color: var(--vp-c-text-2) !important;
+}
+
+.dark .Layout.drawe-home .vp-doc .home a.ep-btn--default:hover {
+  border-color: var(--illus-brand) !important;
+  color: var(--illus-brand-hover) !important;
+  background-color: rgba(var(--illus-brand-rgb), 0.15) !important;
+  -webkit-text-fill-color: var(--illus-brand-hover) !important;
+}
+
+.ep-tiles {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+  margin: 0 0 3rem;
+}
+
+@media (min-width: 768px) {
+  .ep-tiles {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.Layout.drawe-home .vp-doc .home a.ep-tile,
+.Layout.drawe-home .vp-doc .home a.ep-tile:visited {
+  display: block;
+  padding: 24px;
+  border: 1px solid #ebeef5;
+  border-radius: 4px;
+  text-decoration: none !important;
+  color: inherit !important;
+  background: #ffffff;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+  -webkit-text-fill-color: inherit !important;
+  background-image: none !important;
+}
+
+.Layout.drawe-home .vp-doc .home a.ep-tile:hover {
+  border-color: rgba(var(--illus-brand-rgb), 0.35) !important;
+  box-shadow: 0 0 12px rgba(var(--illus-brand-rgb), 0.14);
+}
+
+.dark .Layout.drawe-home .vp-doc .home a.ep-tile,
+.dark .Layout.drawe-home .vp-doc .home a.ep-tile:visited {
+  border-color: var(--vp-c-divider);
+  background: var(--vp-c-bg-soft);
+}
+
+.dark .Layout.drawe-home .vp-doc .home a.ep-tile:hover {
+  border-color: rgba(var(--illus-brand-rgb), 0.5);
+  box-shadow: 0 0 12px rgba(var(--illus-brand-rgb), 0.2);
+}
+
+.ep-tile__icon {
+  display: block;
+  font-size: 1.75rem;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.ep-tile__title {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #303133;
+}
+
+.dark .ep-tile__title {
+  color: var(--vp-c-text-1);
+}
+
+.Layout.drawe-home .vp-doc .home a.ep-tile:hover .ep-tile__title {
+  color: var(--illus-brand) !important;
+  -webkit-text-fill-color: var(--illus-brand) !important;
+}
+
+.ep-tile__desc {
+  margin: 0 0 12px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #909399;
+}
+
+.dark .ep-tile__desc {
+  color: var(--vp-c-text-3);
+}
+
+.ep-tile__desc code {
+  font-size: 0.9em;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background: var(--vp-code-bg);
+}
+
+.ep-tile__more {
+  font-size: 14px;
+  color: var(--illus-brand);
+  font-weight: 500;
+}
+
+.dark .ep-tile__more {
+  color: var(--illus-brand-hover);
+}
+
+/* 首页第三卡：双入口（本地画廊 + 外链），整块不再是单个 <a> */
+.Layout.drawe-home .vp-doc .home .ep-tile--panel {
+  display: block;
+  padding: 24px;
+  border: 1px solid #ebeef5;
+  border-radius: 4px;
+  text-decoration: none;
+  color: inherit;
+  background: #ffffff;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.Layout.drawe-home .vp-doc .home .ep-tile--panel:hover {
+  border-color: rgba(var(--illus-brand-rgb), 0.35);
+  box-shadow: 0 0 12px rgba(var(--illus-brand-rgb), 0.14);
+}
+
+.dark .Layout.drawe-home .vp-doc .home .ep-tile--panel {
+  border-color: var(--vp-c-divider);
+  background: var(--vp-c-bg-soft);
+}
+
+.dark .Layout.drawe-home .vp-doc .home .ep-tile--panel:hover {
+  border-color: rgba(var(--illus-brand-rgb), 0.5);
+  box-shadow: 0 0 12px rgba(var(--illus-brand-rgb), 0.2);
+}
+
+.Layout.drawe-home .vp-doc .home .ep-tile--panel:hover .ep-tile__title {
+  color: var(--illus-brand);
+}
+
+.dark .Layout.drawe-home .vp-doc .home .ep-tile--panel:hover .ep-tile__title {
+  color: var(--illus-brand-hover);
+}
+
+.ep-tile__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+  margin-top: 4px;
+}
+
+.ep-tile__action {
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none !important;
+}
+
+.ep-tile__action--primary {
+  color: var(--illus-brand) !important;
+  -webkit-text-fill-color: var(--illus-brand) !important;
+}
+
+.ep-tile__action--primary:hover {
+  text-decoration: underline !important;
+}
+
+.dark .ep-tile__action--primary {
+  color: var(--illus-brand-hover) !important;
+  -webkit-text-fill-color: var(--illus-brand-hover) !important;
+}
+
+.ep-tile__action--secondary {
+  color: var(--vp-c-text-2) !important;
+  font-weight: 400;
+  -webkit-text-fill-color: var(--vp-c-text-2) !important;
+}
+
+.ep-tile__action--secondary:hover {
+  color: var(--illus-brand) !important;
+  -webkit-text-fill-color: var(--illus-brand) !important;
+}
+
+.dark .ep-tile__action--secondary {
+  color: var(--vp-c-text-3) !important;
+  -webkit-text-fill-color: var(--vp-c-text-3) !important;
+}
+
+.ep-section {
+  margin-bottom: 2.5rem;
+}
+
+.ep-section__title {
+  margin: 0 0 0.5rem;
+  font-size: 22px;
+  font-weight: 600;
+  color: #303133;
+  text-align: center;
+}
+
+.dark .ep-section__title {
+  color: var(--vp-c-text-1);
+}
+
+.ep-section__lead {
+  margin: 0 auto 1.5rem;
+  max-width: 42rem;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #909399;
+  text-align: center;
+}
+
+.dark .ep-section__lead {
+  color: var(--vp-c-text-3);
+}
+
+.ep-section__lead code {
+  font-size: 0.9em;
+  padding: 0.12em 0.4em;
+  border-radius: 4px;
+  background: var(--vp-code-bg);
+}
+
+.ep-demo-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+  .ep-demo-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.ep-demo-card {
+  border: 1px solid #ebeef5;
+  border-radius: 4px;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.dark .ep-demo-card {
+  border-color: var(--vp-c-divider);
+  background: var(--vp-c-bg);
+}
+
+.ep-demo-card__head {
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #303133;
+  background: #fafafa;
+  border-bottom: 1px solid #ebeef5;
+}
+
+.dark .ep-demo-card__head {
+  color: var(--vp-c-text-1);
+  background: var(--vp-c-bg-soft);
+  border-bottom-color: var(--vp-c-divider);
+}
+
+.ep-demo-card__body {
+  padding: 20px 16px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: min(260px, 48vw);
+}
+
+.ep-demo-card__body .draw-empty {
+  padding-bottom: 0.25rem;
+}
+
+/* 首页自定义页脚（frontmatter footer: false 关闭默认 VPFooter，避免重复） */
+.ep-site-footer {
+  margin-top: 2rem;
+  margin-left: calc(-1 * clamp(16px, 3vw, 40px));
+  margin-right: calc(-1 * clamp(16px, 3vw, 40px));
+  padding: 2rem clamp(16px, 3vw, 40px) 1.25rem;
+  background: #f5f7fa;
+  border-top: 1px solid #ebeef5;
+}
+
+.dark .ep-site-footer {
+  background: var(--vp-c-bg-soft);
+  border-top-color: var(--vp-c-divider);
+}
+
+.ep-site-footer__grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .ep-site-footer__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem 3rem;
+  }
+}
+
+.ep-site-footer__heading {
+  margin: 0 0 0.85rem;
+  font-size: 14px;
+  font-weight: 600;
+  color: #303133;
+}
+
+.dark .ep-site-footer__heading {
+  color: var(--vp-c-text-1);
+}
+
+.ep-site-footer__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+  line-height: 2;
+  color: #606266;
+}
+
+.dark .ep-site-footer__list {
+  color: var(--vp-c-text-2);
+}
+
+.ep-site-footer__note {
+  margin-top: 0.65rem !important;
+  line-height: 1.55 !important;
+  color: #909399 !important;
+}
+
+.dark .ep-site-footer__note {
+  color: var(--vp-c-text-3) !important;
+}
+
+.Layout.drawe-home .vp-doc .home .ep-site-footer a {
+  color: #606266 !important;
+  text-decoration: none !important;
+  background-image: none !important;
+  transition: color 0.2s;
+}
+
+.Layout.drawe-home .vp-doc .home .ep-site-footer a:hover {
+  color: var(--illus-brand) !important;
+}
+
+.dark .Layout.drawe-home .vp-doc .home .ep-site-footer a {
+  color: var(--vp-c-text-2) !important;
+}
+
+.dark .Layout.drawe-home .vp-doc .home .ep-site-footer a:hover {
+  color: var(--illus-brand-hover) !important;
+}
+
+.ep-site-footer__bottom {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  padding-bottom: 0;
+  border-top: 1px solid #e4e7ed;
+  text-align: center;
+}
+
+.dark .ep-site-footer__bottom {
+  border-top-color: var(--vp-c-divider);
+}
+
+.ep-site-footer__brand {
+  font-size: 13px;
+  font-weight: 600;
+  color: #909399;
+  letter-spacing: 0.03em;
+}
+
+.dark .ep-site-footer__brand {
+  color: var(--vp-c-text-3);
+}
+
+/* README 实拍页排版（截图由 Playwright 对组件卡片取景，无需隐藏站点导航） */
+.Layout.readme-showcase-page .vp-doc {
+  padding: 0 16px 48px;
+}
+
+.Layout.readme-showcase-page .readme-showcase-root {
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.Layout.readme-showcase-page .readme-capture-section {
+  margin-bottom: 36px;
+}
+
+.Layout.readme-showcase-page .readme-capture-section:last-child {
+  margin-bottom: 0;
+}
+
+.Layout.readme-showcase-page .readme-capture-heading {
+  margin: 0 0 4px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--vp-c-text-3);
+}
+
+.Layout.readme-showcase-page .readme-capture-lead {
+  margin: 0 0 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--vp-c-text-2);
+}
+
+.Layout.readme-showcase-page .readme-capture-frame {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  padding: 28px 20px 32px;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 14px;
+}
