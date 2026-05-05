@@ -9,7 +9,15 @@
 [![Node](https://img.shields.io/badge/Node-%3E%3D18-339933?style=flat-square&logo=node.js&logoColor=white)](https://nodejs.org/)
 [![License MIT](https://img.shields.io/badge/License-MIT-9cf?style=flat-square)](https://opensource.org/licenses/MIT)
 
-**当前版本：0.1.0** · [更新日志](./docs/guide/changelog.md)
+**当前版本：0.1.0** · [更新日志](./docs/guide/changelog.md) · [Releases](https://github.com/yuJunOk/draw-empty/releases)
+
+业务项目可直接用 **GitHub Release** 上的 `.tgz`（无需先发 npm）：
+
+```bash
+npm install https://github.com/yuJunOk/draw-empty/releases/download/v0.1.0/draw-empty-0.1.0.tgz
+```
+
+（换版本时把 URL 里的 **`v0.1.0`** 和 **`draw-empty-0.1.0.tgz`** 改成对应 Release。）
 
 ## 预览
 

@@ -102,11 +102,13 @@ npm install draw-empty
 在发包前，可用 **Git 依赖**、**本地路径** 或 **`.tgz`** 验证：
 
 ```bash
-npm install git+https://github.com/<org>/<repo>.git#main
+npm install git+https://github.com/yuJunOk/draw-empty.git#main
 # 或
 npm install file:../draw-empty
-# 或（维护者 npm run pack 生成的文件）
+# 或（维护者 npm run pack 生成的本地文件）
 npm install ./releases/draw-empty-0.1.0.tgz
+# 或（GitHub Release 附件直链，版本号与文件名随 Release 更新）
+npm install https://github.com/yuJunOk/draw-empty/releases/download/v0.1.0/draw-empty-0.1.0.tgz
 ```
 
 ---
