@@ -21,13 +21,11 @@ npm install https://github.com/yuJunOk/draw-empty/releases/download/v0.1.0/draw-
 
 ## 预览
 
-实拍页 **`/readme-showcase`**（[`docs/readme-showcase.md`](./docs/readme-showcase.md)）。
-
 | 基础 | 操作区 + extra | accent | UndrawImg |
 |------|----------------|--------|-----------|
 | ![](./assets/readme/empty-state-basic.png) | ![](./assets/readme/empty-state-action.png) | ![](./assets/readme/empty-state-accent.png) | ![](./assets/readme/undraw-img-only.png) |
 
-更新配图、插图脚本、文档站日常改动 → [**DEV_HELPER.md**](./DEV_HELPER.md)。
+插图同步与文档站日常改动 → [**DEV_HELPER.md**](./DEV_HELPER.md)。
 
 ## 快速开始
 
@@ -52,14 +50,13 @@ npm run dev
 | `prepare:undraw` | 演示用 SVG → `src/assets/undraw-illustrations/` |
 | `prepare:undraw:all` | 尽量拉全库（量大、耗时） |
 | `typecheck` | `src/` 组件类型检查 |
-| `readme:capture` | README 预览 PNG（需先 `build`，详见 DEV_HELPER） |
 | `pack` | 打 **npm 安装包** → **`releases/draw-empty-*.tgz`**（须先手动建 **`releases/`**）；检查列表：**`npm pack --dry-run --pack-destination releases`** |
 
 ## 更多文档
 
 - 指南：`docs/guide/`
 - 维护与架构：[**DEVELOPMENT.md**](./DEVELOPMENT.md)
-- 插图同步、README 实拍、改文档站：[**DEV_HELPER.md**](./DEV_HELPER.md)
+- 插图同步、改文档站：[**DEV_HELPER.md**](./DEV_HELPER.md)
 
 ## 许可
 

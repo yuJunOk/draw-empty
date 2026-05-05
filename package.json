@@ -27,7 +27,6 @@
     "prepare:undraw": "node scripts/setup-undraw-demos.cjs",
     "prepare:undraw:all": "node scripts/setup-undraw-demos.cjs --all",
     "typecheck": "vue-tsc --noEmit -p tsconfig.app.json",
-    "readme:capture": "node scripts/capture-readme-screenshots.mjs",
     "pack": "npm pack --pack-destination releases"
   },
   "_comments_scripts": {
@@ -38,11 +37,9 @@
     "prepare:undraw": "从 unDraw API 下载预设演示 SVG → src/assets/undraw-illustrations/",
     "prepare:undraw:all": "尽量下载官网索引下的全部插图（体积大、耗时长）",
     "typecheck": "对 src/ 组件跑 vue-tsc（不含 Markdown）",
-    "readme:capture": "Playwright 截取 /readme-showcase → assets/readme/*.png（通常需先 npm run build）",
     "pack": "→ releases/draw-empty-*.tgz；需先手动建好 releases/（npm 不会自动创建）；可多版本并存"
   },
   "devDependencies": {
-    "playwright": "^1.49.1",
     "vue": "^3.5.32",
     "@types/node": "^24.12.2",
     "@vue/tsconfig": "^0.9.1",

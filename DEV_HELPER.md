@@ -1,6 +1,6 @@
 # 开发辅助
 
-维护本仓库时常做的三件事：**同步插图资源**、**更新 README 实拍图（可交给 AI 跑命令）**、**改文档站**。  
+维护本仓库时常做的两件事：**同步插图资源**、**改文档站**。  
 更细的架构与扩展步骤见 [**DEVELOPMENT.md**](./DEVELOPMENT.md)。
 
 ---
@@ -18,38 +18,7 @@
 
 ---
 
-## 2. README 实拍图 & 让 AI 帮你截
-
-**链路：** **`docs/readme-showcase.md`**（`/readme-showcase`）→ 盒子带 **`data-readme-capture`** → **`scripts/capture-readme-screenshots.mjs`** → **`assets/readme/*.png`** → **`README.md`** 引用。
-
-```bash
-npm install
-npx playwright install chromium    # 首次
-npm run build
-npm run readme:capture             # 默认临时预览在 4174，覆盖同名 PNG
-```
-
-已在跑 **`npm run preview`**（例如 4173）时：
-
-```powershell
-$env:README_PREVIEW_URL='http://127.0.0.1:4173'; npm run readme:capture
-```
-
-**多一张图：** `readme-showcase.md` 加一节 + `data-readme-capture` → `capture-readme-screenshots.mjs` 里 **`captures`** 加一项 → README（或其它文档）引用新 PNG → **`build && readme:capture`**。
-
-**交给 AI 时可粘贴（按需改）：**
-
-```text
-在本仓库执行 npm run build && npm run readme:capture，用 Playwright 更新 assets/readme；实拍页 docs/readme-showcase.md。禁止文生图冒充截图。
-```
-
-```text
-给 readme-showcase 加 data-readme-capture 区块，并改 capture-readme-screenshots.mjs 的 captures，最后 build + readme:capture。
-```
-
----
-
-## 3. 文档式网站怎么开发（当前技术栈）
+## 2. 文档式网站怎么开发（当前技术栈）
 
 | 项 | 说明 |
 |----|------|

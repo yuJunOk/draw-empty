@@ -36,7 +36,6 @@ outline: deep
 **文档站（VitePress）**
 
 - 指南（介绍、快速开始、**npm 接入**）、组件文档（API + Demo + **`?raw`** 同源示例）、插图资源浏览页。
-- **`/readme-showcase`**：README 用组件实拍页；**`npm run readme:capture`**（Playwright）导出 **`assets/readme/*.png`**。
 
 **分发说明**
 
