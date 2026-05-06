@@ -10,12 +10,13 @@ pageClass: drawe-home
 import Basic from './demos/draw-empty-basic.vue'
 import Action from './demos/draw-empty-action.vue'
 import Accent from './demos/draw-empty-accent.vue'
-import { useData } from 'vitepress'
+import { useData, withBase } from 'vitepress'
 import {
+  BRAND_EN_ABBR,
+  BRAND_PKG_NAME,
   getIllusOfficialSite,
   isRemoteIllusOfficialSite,
 } from './.vitepress/site-meta'
-import { BRAND_EN_ABBR, BRAND_PKG_NAME } from './.vitepress/brand'
 
 const { theme } = useData()
 /** @type {string} */
@@ -43,8 +44,8 @@ const illusSiteRemote = isRemoteIllusOfficialSite(illusSiteHref)
         <code>accent-color</code> 与 unDraw SVG。
       </p>
       <div class="ep-hero__actions">
-        <a class="ep-btn ep-btn--primary" href="/guide/quickstart">快速开始</a>
-        <a class="ep-btn ep-btn--default" href="/components/draw-empty">组件文档</a>
+        <a class="ep-btn ep-btn--primary" :href="withBase('/guide/quickstart')">快速开始</a>
+        <a class="ep-btn ep-btn--default" :href="withBase('/components/draw-empty')">组件文档</a>
       </div>
     </div>
     <div class="ep-hero__visual" aria-hidden="true">
@@ -53,7 +54,7 @@ const illusSiteRemote = isRemoteIllusOfficialSite(illusSiteHref)
         <div class="ep-hero__visual-deco" aria-hidden="true"></div>
         <img
           class="ep-hero__logo ep-hero__logo--feature"
-          src="/logo.svg"
+          :src="withBase('/logo.svg')"
           width="160"
           height="160"
           :alt="`${BRAND_EN_ABBR} · ${BRAND_PKG_NAME}`"
@@ -65,13 +66,13 @@ const illusSiteRemote = isRemoteIllusOfficialSite(illusSiteHref)
 </section>
 
 <section class="ep-tiles" aria-label="文档入口">
-  <a class="ep-tile" href="/guide/introduction">
+  <a class="ep-tile" :href="withBase('/guide/introduction')">
     <span class="ep-tile__icon" aria-hidden="true">📘</span>
     <h2 class="ep-tile__title">指南</h2>
     <p class="ep-tile__desc">了解项目定位、包含内容与插图版权说明。</p>
     <span class="ep-tile__more">查看详情</span>
   </a>
-  <a class="ep-tile" href="/components/draw-empty">
+  <a class="ep-tile" :href="withBase('/components/draw-empty')">
     <span class="ep-tile__icon" aria-hidden="true">🧩</span>
     <h2 class="ep-tile__title">组件</h2>
     <p class="ep-tile__desc">插画空状态（DrawEmpty）的 props、插槽与可运行 Demo。</p>
@@ -84,7 +85,7 @@ const illusSiteRemote = isRemoteIllusOfficialSite(illusSiteHref)
       在站内按官网标题浏览本地已下载的 SVG，支持搜索与复制组件代码；也可前往 unDraw 浏览更多素材并配色下载。
     </p>
     <div class="ep-tile__actions">
-      <a class="ep-tile__action ep-tile__action--primary" href="/components/illustration-gallery">
+      <a class="ep-tile__action ep-tile__action--primary" :href="withBase('/components/illustration-gallery')">
         浏览本地插图
       </a>
       <a
@@ -103,7 +104,7 @@ const illusSiteRemote = isRemoteIllusOfficialSite(illusSiteHref)
   <h2 id="ep-demo-title" class="ep-section__title">在线示例</h2>
   <p class="ep-section__lead">
     以下为站内真实渲染；完整源码见
-    <a href="/components/draw-empty">组件文档</a>。若插图未显示，请先执行 <code>npm run prepare:undraw</code>。
+    <a :href="withBase('/components/draw-empty')">组件文档</a>。若插图未显示，请先执行 <code>npm run prepare:undraw</code>。
   </p>
 
   <div class="ep-demo-grid">
@@ -139,8 +140,8 @@ const illusSiteRemote = isRemoteIllusOfficialSite(illusSiteHref)
     <div class="ep-site-footer__col">
       <h3 class="ep-site-footer__heading">文档</h3>
       <ul class="ep-site-footer__list">
-        <li><a href="/guide/introduction">介绍</a></li>
-        <li><a href="/guide/quickstart">快速开始</a></li>
+        <li><a :href="withBase('/guide/introduction')">介绍</a></li>
+        <li><a :href="withBase('/guide/quickstart')">快速开始</a></li>
         <li v-if="illusSiteRemote">
           <a :href="illusSiteHref" target="_blank" rel="noopener noreferrer">DrawE 外链</a>
         </li>
@@ -149,7 +150,7 @@ const illusSiteRemote = isRemoteIllusOfficialSite(illusSiteHref)
     <div class="ep-site-footer__col">
       <h3 class="ep-site-footer__heading">组件</h3>
       <ul class="ep-site-footer__list">
-        <li><a href="/components/draw-empty">插画空状态</a></li>
+        <li><a :href="withBase('/components/draw-empty')">插画空状态</a></li>
       </ul>
     </div>
     <div class="ep-site-footer__col">

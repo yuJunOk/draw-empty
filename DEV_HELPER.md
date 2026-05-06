@@ -32,6 +32,6 @@
 | 引用库组件 | 别名 **`@draw-empty`** → 项目 **`src/`**，在 **`config.ts`** 的 **`vite.resolve.alias`** 已配好 |
 | 全局样式 / 主题 | **`docs/.vitepress/theme/custom.css`**；扩展入口 **`theme/index.ts`**（含 **`CodeBlock`**） |
 
-首页、脚注文案、插图外链等细节见 **DEVELOPMENT.md** 第 **5** 节及后文。
+首页、脚注文案、插图外链等细节见 **DEVELOPMENT.md** 中 **「文档站工作流程（VitePress）」** 一节及后文。
 
 发版时同步 bump **`package.json` 的 `version`**，并写 **`docs/guide/changelog.md`**（导航「更新日志」与页脚文案会从该版本号读取）。

@@ -29,23 +29,13 @@
     "typecheck": "vue-tsc --noEmit -p tsconfig.app.json",
     "pack": "npm pack --pack-destination releases"
   },
-  "_comments_scripts": {
-    "_": "JSON 不支持 // 注释；本字段仅作文档，npm 会忽略。键名与 scripts 一一对应。",
-    "dev": "启动 VitePress 文档站开发服务器（内容根目录 docs/）",
-    "build": "构建文档静态站点，产物在 docs/.vitepress/dist/",
-    "preview": "本地预览 build 后的静态站",
-    "prepare:undraw": "从 unDraw API 下载预设演示 SVG → src/assets/undraw-illustrations/",
-    "prepare:undraw:all": "尽量下载官网索引下的全部插图（体积大、耗时长）",
-    "typecheck": "对 src/ 组件跑 vue-tsc（不含 Markdown）",
-    "pack": "→ releases/draw-empty-*.tgz；需先手动建好 releases/（npm 不会自动创建）；可多版本并存"
-  },
   "devDependencies": {
-    "vue": "^3.5.32",
     "@types/node": "^24.12.2",
     "@vue/tsconfig": "^0.9.1",
     "typescript": "~6.0.2",
     "vite": "^8.0.10",
     "vitepress": "^1.6.4",
+    "vue": "^3.5.32",
     "vue-tsc": "^3.2.7"
   }
 }

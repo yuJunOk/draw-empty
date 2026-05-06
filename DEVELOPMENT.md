@@ -122,7 +122,34 @@ npm run preview
 
 ---
 
-## 5. 文档站工作流程（VitePress）
+## 5. GitHub Pages 部署
+
+面向把文档站挂到 **`https://<用户名>.github.io/<仓库名>/`** 的维护者（与本地「步骤 5～6」的构建命令同源，只是多了子路径环境变量与 CI）。
+
+1. 在 GitHub 打开仓库 **Settings → Pages**。
+2. **Build and deployment → Source** 选择 **GitHub Actions**（不要用 Branch 指向 `docs/` 等方式；本站构建产物在 `docs/.vitepress/dist/`）。
+3. 将默认分支（`main` 或 `master`）推送到 GitHub。工作流 **Deploy GitHub Pages**（`.github/workflows/deploy-github-pages.yml`）会执行 `npm ci`，并带上 **`VITEPRESS_BASE=/<仓库名>/`** 执行 `npm run build`，再把 **`docs/.vitepress/dist`** 发布到 Pages。
+4. 站点 URL 形如 **`https://<用户名>.github.io/<仓库名>/`**（与 `VITEPRESS_BASE` 一致；工作流里用 `github.event.repository.name` 自动对齐仓库名）。
+
+若使用**自定义域名且站点挂在域名根路径**，需把构建时的基准路径改为 `/`：修改上述工作流里的 `VITEPRESS_BASE`（例如改成 `/`），或在仓库 Variables 里配置后再由工作流读取。
+
+**本地模拟「项目站」子路径构建**（把 `draw-empty` 换成你的仓库名）：
+
+```powershell
+# Windows PowerShell
+$env:VITEPRESS_BASE = "/draw-empty/"
+npm run build
+npm run preview
+```
+
+```bash
+# bash
+VITEPRESS_BASE=/draw-empty/ npm run build && npm run preview
+```
+
+---
+
+## 6. 文档站工作流程（VitePress）
 
 1. **`npm run dev`** → 执行 `vitepress dev docs`  
    - 将 **`docs/`** 视为内容根目录  
@@ -149,7 +176,7 @@ npm run preview
 
 ---
 
-## 6. 如何新增一篇指南文档
+## 7. 如何新增一篇指南文档
 
 1. 在 `docs/guide/` 新建 `xxx.md`。  
 2. 在 `docs/.vitepress/config.ts` 的 `themeConfig.sidebar['/guide/']` 里增加一项 `{ text: '标题', link: '/guide/xxx' }`。  
@@ -157,7 +184,7 @@ npm run preview
 
 ---
 
-## 7. 如何新增「Demo + 示例代码」（推荐流程）
+## 8. 如何新增「Demo + 示例代码」（推荐流程）
 
 目标：**页面上看到的效果**与**下方展示的代码**一致，且只维护一份 Vue 文件。
 
@@ -185,7 +212,7 @@ import myDemoRaw from '../demos/my-demo.vue?raw'
 
 ---
 
-## 8. 组件与插图路径约定
+## 9. 组件与插图路径约定
 
 - **`UndrawImg`** 使用 `import.meta.glob('../assets/undraw-illustrations/*.svg', { query: '?raw' })`，路径相对于 **`src/components/UndrawImg.vue`**。  
 - 新增插图：放入 **`src/assets/undraw-illustrations/`**，**文件名（无 `.svg`）与官网英文标题一致**（可用脚本 `fileStemFromOfficialTitle` 对齐剔除非法字符），与 `illustration` / `UndrawImg` 的 `name` 相同。  
@@ -193,7 +220,7 @@ import myDemoRaw from '../demos/my-demo.vue?raw'
 
 ---
 
-## 9. 依赖刻意未引入的内容（维护取向）
+## 10. 依赖刻意未引入的内容（维护取向）
 
 - **Tailwind / UnoCSS**：减少构建链与类名约定，文档页依赖默认主题样式即可。  
 - **vue-router**：路由由 VitePress 管理。  
@@ -202,7 +229,7 @@ import myDemoRaw from '../demos/my-demo.vue?raw'
 
 ---
 
-## 10. 常见问题
+## 11. 常见问题
 
 **Q：`npm run build` 报与 Markdown 中组件相关的错？**  
 先确认 Demo 里 `@draw-empty` 路径是否正确、`prepare:undraw` 是否已执行。
@@ -215,7 +242,7 @@ import myDemoRaw from '../demos/my-demo.vue?raw'
 
 ---
 
-## 11. 小结
+## 12. 小结
 
 - **产品介绍首页**：`docs/index.md`（`sidebar: false`、`pageClass: drawe-home`；扁平 Hero、三栏文档入口、嵌入 Demo；视觉对齐 Element Plus 文档站主色与边框色，样式在 `custom.css` 的 `.ep-*`）。  
 - **文档与 API 叙述**：`docs/guide/*`、`docs/components/*`。  

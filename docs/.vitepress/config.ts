@@ -8,15 +8,30 @@ const projectRoot = path.resolve(__dirname, '../..')
 const pkg = JSON.parse(fs.readFileSync(path.join(projectRoot, 'package.json'), 'utf-8')) as { version: string }
 const siteVersion = pkg.version
 
+/**
+ * GitHub Pages 项目站：`https://<user>.github.io/<repo>/`
+ * CI 中设置 `VITEPRESS_BASE=/<repo>/`（须首尾 `/`，末位可为仓库名后的 `/`）。
+ */
+function vitepressBase(): string {
+  const raw = process.env.VITEPRESS_BASE?.trim()
+  if (!raw || raw === '/') return '/'
+  let b = raw.startsWith('/') ? raw : `/${raw}`
+  if (!b.endsWith('/')) b = `${b}/`
+  return b
+}
+
+const base = vitepressBase()
+
 export default defineConfig({
+  base,
   lang: 'zh-CN',
   title: 'DrawE',
   description: 'DrawE（draw-empty）：基于 Vue 3 与 unDraw 的插画空状态组件与文档',
   srcDir: '.',
   cleanUrls: true,
   head: [
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
-    ['link', { rel: 'alternate icon', href: '/favicon.svg' }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: `${base}favicon.svg` }],
+    ['link', { rel: 'alternate icon', href: `${base}favicon.svg` }],
   ],
   themeConfig: {
     logo: '/logo.svg',

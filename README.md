@@ -41,6 +41,8 @@ npm run dev
 
 静态构建：`npm run build`，预览：`npm run preview`（产物 **`docs/.vitepress/dist/`**）。
 
+**GitHub Pages**：仓库 **Settings → Pages → Source** 选 **GitHub Actions**，推送默认分支后由工作流发布；子路径与 `VITEPRESS_BASE` 说明见 [**DEVELOPMENT.md**](./DEVELOPMENT.md) **§5**。
+
 ## 脚本
 
 | 命令 | 说明 |
