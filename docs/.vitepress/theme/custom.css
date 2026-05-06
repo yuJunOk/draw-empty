@@ -921,6 +921,20 @@ html::-webkit-scrollbar-corner {
   color: var(--illus-brand-hover) !important;
 }
 
+/* GitHub 账号入口：保持品牌色，不被上方「页脚灰链」规则盖住 */
+.Layout.drawe-home .vp-doc .home .ep-site-footer a.ep-site-footer__github {
+  color: var(--illus-brand) !important;
+}
+
+.Layout.drawe-home .vp-doc .home .ep-site-footer a.ep-site-footer__github:hover {
+  color: var(--illus-brand-hover) !important;
+  text-decoration: underline !important;
+}
+
+.dark .Layout.drawe-home .vp-doc .home .ep-site-footer a.ep-site-footer__github {
+  color: var(--illus-brand-hover) !important;
+}
+
 .ep-site-footer__bottom {
   margin-top: 1.5rem;
   padding-top: 1rem;
@@ -933,6 +947,13 @@ html::-webkit-scrollbar-corner {
   border-top-color: var(--vp-c-divider);
 }
 
+.ep-site-footer__bottom-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
 .ep-site-footer__brand {
   font-size: 13px;
   font-weight: 600;
@@ -942,4 +963,65 @@ html::-webkit-scrollbar-corner {
 
 .dark .ep-site-footer__brand {
   color: var(--vp-c-text-3);
+}
+
+.ep-site-footer__credit {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  font-size: 12px;
+  font-weight: 400;
+  color: #a8abb2;
+}
+
+.dark .ep-site-footer__credit {
+  color: var(--vp-c-text-3);
+}
+
+.ep-site-footer__author {
+  font-weight: 500;
+  color: #909399;
+}
+
+.dark .ep-site-footer__author {
+  color: var(--vp-c-text-3);
+}
+
+.ep-site-footer__credit-sep {
+  color: #c0c4cc;
+  user-select: none;
+}
+
+.dark .ep-site-footer__credit-sep {
+  color: var(--vp-c-text-3);
+}
+
+a.ep-site-footer__github {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-weight: 500;
+  color: var(--illus-brand);
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+a.ep-site-footer__github:hover {
+  text-decoration: underline;
+}
+
+.dark a.ep-site-footer__github {
+  color: var(--illus-brand-hover);
+}
+
+.ep-site-footer__github-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.ep-site-footer__github-handle {
+  line-height: 1;
 }

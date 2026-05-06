@@ -67,7 +67,7 @@ export default defineConfig({
     socialLinks: [],
     footer: {
       message: `MIT License · 插图遵循 unDraw 许可 · 当前文档对应 v${siteVersion}`,
-      copyright: `DrawE · draw-empty`,
+      copyright: `DrawE · draw-empty · Made by pengYuJun`,
     },
     outline: {
       label: '本页目录',
