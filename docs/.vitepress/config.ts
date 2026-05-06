@@ -80,9 +80,6 @@ export default defineConfig({
     search: {
       provider: 'local',
     },
-
-    /** 首页页脚等客户端可读（自定义字段） */
-    drawEmptyVersion: siteVersion,
   },
   vite: {
     resolve: {

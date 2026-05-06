@@ -10,17 +10,17 @@ pageClass: drawe-home
 import Basic from './demos/draw-empty-basic.vue'
 import Action from './demos/draw-empty-action.vue'
 import Accent from './demos/draw-empty-accent.vue'
-import { useData, withBase } from 'vitepress'
+import { withBase } from 'vitepress'
 import {
   BRAND_EN_ABBR,
   BRAND_PKG_NAME,
+  SITE_PACKAGE_VERSION,
   getIllusOfficialSite,
   isRemoteIllusOfficialSite,
 } from './.vitepress/site-meta'
 
-const { theme } = useData()
-/** @type {string} */
-const siteVersion = String(theme.drawEmptyVersion ?? '')
+/** 首页页脚等处展示的版本号（与根目录 package.json 一致） */
+const siteVersion = SITE_PACKAGE_VERSION
 
 const illusSiteHref = getIllusOfficialSite()
 const illusSiteRemote = isRemoteIllusOfficialSite(illusSiteHref)
@@ -103,9 +103,7 @@ const illusSiteRemote = isRemoteIllusOfficialSite(illusSiteHref)
 <section class="ep-section" aria-labelledby="ep-demo-title">
   <h2 id="ep-demo-title" class="ep-section__title">在线示例</h2>
   <p class="ep-section__lead">
-    以下为站内真实渲染；完整源码见
-    <a :href="withBase('/components/draw-empty')">组件文档</a>。若在<strong>本地</strong>运行文档站且插图为空，见
-    <a :href="withBase('/guide/maintainer-note')">仓库与文档站维护</a> 中的插图脚本。
+    以下为站内真实渲染；完整源码见 <a :href="withBase('/components/draw-empty')">组件文档</a>。若在<strong>本地</strong>运行文档站且插图为空，请查看 <a :href="withBase('/guide/maintainer-note')">仓库与文档站维护</a> 中的插图脚本说明。
   </p>
 
   <div class="ep-demo-grid">

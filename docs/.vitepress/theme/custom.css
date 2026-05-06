@@ -144,6 +144,28 @@ html::-webkit-scrollbar-corner {
   }
 }
 
+/*
+ * 首页 frontmatter 已 outline: false，主题仍可能保留 `has-aside` + 右侧占位，
+ * 正文被挤成窄列 → 「在线示例」引导语在中间看似不居中、且过早换行。
+ */
+.Layout.drawe-home .VPDoc.has-aside .container {
+  display: block !important;
+}
+
+.Layout.drawe-home .VPDoc.has-aside .aside {
+  display: none !important;
+}
+
+.Layout.drawe-home .VPDoc.has-aside .content-container {
+  max-width: none !important;
+  width: 100% !important;
+}
+
+.Layout.drawe-home .VPDoc.has-aside .content {
+  max-width: none !important;
+  width: 100%;
+}
+
 /* Hero：全宽浅色带 + 宽屏左右分栏（文案 / 品牌图形），窄屏上图下文 */
 .ep-home.home {
   max-width: none;
@@ -746,9 +768,10 @@ html::-webkit-scrollbar-corner {
 
 .ep-section__lead {
   margin: 0 auto 1.5rem;
-  max-width: 42rem;
+  padding-inline: 0.25rem;
+  box-sizing: border-box;
   font-size: 14px;
-  line-height: 1.7;
+  line-height: 1.75;
   color: #909399;
   text-align: center;
 }
