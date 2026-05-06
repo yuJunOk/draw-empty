@@ -37,21 +37,26 @@ export default defineConfig({
     logo: '/logo.svg',
     nav: [
       { text: '首页', link: '/' },
-      { text: '使用指南', link: '/guide/introduction' },
+      { text: '指南', link: '/guide/introduction' },
       { text: '组件', link: '/components/draw-empty' },
-      { text: '插图浏览', link: '/components/illustration-gallery' },
+      { text: '资源', link: '/components/illustration-gallery' },
       { text: `更新日志 v${siteVersion}`, link: '/guide/changelog' },
     ],
     sidebar: {
       '/guide/': [
         {
-          text: '使用指南',
+          text: '指南',
           items: [
             { text: '介绍', link: '/guide/introduction' },
             { text: '快速开始', link: '/guide/quickstart' },
-            { text: 'npm 依赖接入', link: '/guide/npm' },
+            { text: '安装与接入', link: '/guide/install' },
             { text: '更新日志', link: '/guide/changelog' },
           ],
+        },
+        {
+          text: '维护说明',
+          collapsed: true,
+          items: [{ text: '仓库与文档站维护', link: '/guide/maintainer-note' }],
         },
       ],
       '/components/': [

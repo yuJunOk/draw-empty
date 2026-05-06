@@ -22,7 +22,7 @@ import accentRaw from '../demos/draw-empty-accent.vue?raw'
 - 网络错误、服务不可用
 - 表单提交成功等轻量反馈（非复杂流程）
 
-依赖 **`src/assets/undraw-illustrations/`** 下的 SVG，请先执行 `npm run prepare:undraw` 或自备同名资源。本地已有文件可在 **[插图资源浏览](./illustration-gallery)** 页检索与复制用法代码。
+依赖包内 **`src/assets/undraw-illustrations/`** 下的 SVG（随 Release / Git 安装一并提供）。文件名可在 **[插图资源浏览](./illustration-gallery)** 检索并复制用法；维护仓库时拉取插图见 **[仓库与文档站维护](/guide/maintainer-note)**。
 
 ## Props
 
@@ -30,9 +30,9 @@ import accentRaw from '../demos/draw-empty-accent.vue?raw'
 |------|------|------|
 | `title` | `string` | 主标题 |
 | `description` | `string` | 说明文案 |
-| `illustration` | `string` | 对应 `src/assets/undraw-illustrations/<标题>.svg`（不含后缀；**与官网 Illustrations 卡片英文标题一致**，可含空格，如 `Signed Document`，由 `prepare:undraw` 生成） |
+| `illustration` | `string` | 对应包内 `src/assets/undraw-illustrations/<标题>.svg`（不含后缀；**与官网 Illustrations 英文标题一致**，可含空格，如 `Signed Document`） |
 | `imageWidth` / `imageHeight` | `string \| number` | 插图尺寸 |
-| `accentColor` | `string` | 可选，HEX。替换 SVG 中常见主色（演示蓝 / unDraw 紫） |
+| `accentColor` | `string` | 可选，**`#` + 六位颜色**。统一插图配色（替换 SVG 里默认的蓝 / 紫）；与 CSS 的 **`accent-color`** 不是同一概念 |
 
 ## 插槽
 
@@ -58,7 +58,9 @@ import accentRaw from '../demos/draw-empty-accent.vue?raw'
 
 <CodeBlock :code="actionRaw" title="draw-empty-action.vue" />
 
-## 主题色 accent-color
+## 插图主色（`accent-color`）
+
+通过属性 **`accent-color`**（或 **`accentColor`**）传入 **`#RRGGBB`**，即可把插图里的默认配色改成你的产品主色；也可用插件对全站设默认值，详见 [安装与接入 · 插图主色](/guide/install#illustration-accent)。
 
 <ClientOnly>
   <Accent />
@@ -75,6 +77,6 @@ import accentRaw from '../demos/draw-empty-accent.vue?raw'
 | `name` | `string` | `undraw-illustrations` 目录下文件名（不含 `.svg`，与官网英文标题一致，可含空格） |
 | `width` / `height` | `string \| number` | 尺寸 |
 | `alt` | `string` | 无障碍说明 |
-| `accentColor` | `string` | 可选，HEX，替换常见演示色 |
+| `accentColor` | `string` | 可选，**`#` + 六位颜色**，含义同 **`DrawEmpty`** 的插图主色 |
 
-实现见 `src/components/UndrawImg.vue`（`import.meta.glob` + `?raw`）。
+底层实现见源码 **`UndrawImg.vue`**（构建时扫描插图目录并读取 SVG 文本）。

@@ -15,5 +15,5 @@ import IllustrationGallery from '../demos/IllustrationGallery.vue'
 
 ## 说明
 
-- 列表随本地文件变化：执行 `npm run prepare:undraw` / `prepare:undraw:all` 后刷新页面即可。
-- 复制内容为最小用法：`<DrawEmpty illustration="<slug>" />`，在你的项目中需自行配置 `@draw-empty` 别名或相对路径引入组件（见 [插画空状态](./draw-empty)）。
+- 列表反映当前包内的 SVG；**维护仓库**时拉取或更新插图后刷新即可，脚本说明见 [仓库与文档站维护](/guide/maintainer-note)。
+- 复制内容为最小用法：`<DrawEmpty illustration="<文件名不含后缀>" />`，业务项目中通过 **`draw-empty`** 包引入组件（见 [安装与接入](/guide/install) 与 [插画空状态](./draw-empty)）。

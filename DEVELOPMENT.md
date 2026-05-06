@@ -158,6 +158,8 @@ VITEPRESS_BASE=/draw-empty/ npm run build && npm run preview
 2. **路由与页面**  
    - `docs/index.md` → `/`  
    - `docs/guide/introduction.md` → `/guide/introduction`（`cleanUrls` 开启时无 `.html` 后缀）  
+   - `docs/guide/install.md` → `/guide/install`（对外「安装与接入」正文；旧路径 `/guide/npm` 仅保留跳转 stub）  
+   - `docs/guide/maintainer-note.md` → `/guide/maintainer-note`（维护附录；侧栏默认折叠）  
    - `docs/components/draw-empty.md` → `/components/draw-empty`  
 
 3. **Markdown 中的 Vue**  

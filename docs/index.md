@@ -40,8 +40,8 @@ const illusSiteRemote = isRemoteIllusOfficialSite(illusSiteHref)
       <p class="ep-hero__lead">
         <strong>{{ BRAND_EN_ABBR }}</strong>
         <span class="ep-hero__lead-muted">（Drawing × Empty）</span>
-        — Vue 3 插画空状态组件；npm 包 <code>{{ BRAND_PKG_NAME }}</code>。上图下文一体编排插图、标题、说明与操作区，支持
-        <code>accent-color</code> 与 unDraw SVG。
+        — 面向设计与开发的 Vue 3 插画空状态组件：插图、标题、说明与操作区一体编排；插图颜色可与品牌对齐（属性
+        <code>accent-color</code>），素材为本地 unDraw 风格 SVG。
       </p>
       <div class="ep-hero__actions">
         <a class="ep-btn ep-btn--primary" :href="withBase('/guide/quickstart')">快速开始</a>
@@ -69,20 +69,20 @@ const illusSiteRemote = isRemoteIllusOfficialSite(illusSiteHref)
   <a class="ep-tile" :href="withBase('/guide/introduction')">
     <span class="ep-tile__icon" aria-hidden="true">📘</span>
     <h2 class="ep-tile__title">指南</h2>
-    <p class="ep-tile__desc">了解项目定位、包含内容与插图版权说明。</p>
+    <p class="ep-tile__desc">了解适用场景、快速接入步骤与安装方式（对标常见组件库文档结构）。</p>
     <span class="ep-tile__more">查看详情</span>
   </a>
   <a class="ep-tile" :href="withBase('/components/draw-empty')">
     <span class="ep-tile__icon" aria-hidden="true">🧩</span>
     <h2 class="ep-tile__title">组件</h2>
-    <p class="ep-tile__desc">插画空状态（DrawEmpty）的 props、插槽与可运行 Demo。</p>
+    <p class="ep-tile__desc">通过 Demo 查看交互与 API：DrawEmpty、UndrawImg、插槽与示例代码。</p>
     <span class="ep-tile__more">查看详情</span>
   </a>
   <div class="ep-tile ep-tile--panel">
     <span class="ep-tile__icon" aria-hidden="true">⚡</span>
-    <h2 class="ep-tile__title">插图资源</h2>
+    <h2 class="ep-tile__title">资源</h2>
     <p class="ep-tile__desc">
-      在站内按官网标题浏览本地已下载的 SVG，支持搜索与复制组件代码；也可前往 unDraw 浏览更多素材并配色下载。
+      浏览包内已带的插图文件名、搜索并复制用法；也可前往 unDraw 获取更多素材。
     </p>
     <div class="ep-tile__actions">
       <a class="ep-tile__action ep-tile__action--primary" :href="withBase('/components/illustration-gallery')">
@@ -104,7 +104,8 @@ const illusSiteRemote = isRemoteIllusOfficialSite(illusSiteHref)
   <h2 id="ep-demo-title" class="ep-section__title">在线示例</h2>
   <p class="ep-section__lead">
     以下为站内真实渲染；完整源码见
-    <a :href="withBase('/components/draw-empty')">组件文档</a>。若插图未显示，请先执行 <code>npm run prepare:undraw</code>。
+    <a :href="withBase('/components/draw-empty')">组件文档</a>。若在<strong>本地</strong>运行文档站且插图为空，见
+    <a :href="withBase('/guide/maintainer-note')">仓库与文档站维护</a> 中的插图脚本。
   </p>
 
   <div class="ep-demo-grid">
@@ -125,7 +126,7 @@ const illusSiteRemote = isRemoteIllusOfficialSite(illusSiteHref)
       </div>
     </article>
     <article class="ep-demo-card">
-      <header class="ep-demo-card__head">accent-color</header>
+      <header class="ep-demo-card__head">插图主色</header>
       <div class="ep-demo-card__body">
         <ClientOnly>
           <Accent />
@@ -158,7 +159,11 @@ const illusSiteRemote = isRemoteIllusOfficialSite(illusSiteHref)
       <ul class="ep-site-footer__list">
         <li>MIT License</li>
         <li>插图遵循 unDraw 许可</li>
-        <li class="ep-site-footer__note">工程说明见仓库根目录 <strong>DEVELOPMENT.md</strong></li>
+        <li class="ep-site-footer__note">
+          维护文档站与打包见
+          <a :href="withBase('/guide/maintainer-note')">仓库与文档站维护</a>
+          ；完整架构说明见 GitHub 仓库内 <strong>DEVELOPMENT.md</strong>
+        </li>
       </ul>
     </div>
   </div>

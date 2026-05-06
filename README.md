@@ -1,6 +1,12 @@
-# DrawE · draw-empty
+<p align="center">
+  <a href="https://yujunok.github.io/draw-empty/" title="DrawE 在线文档">
+    <img src="./docs/public/logo.svg" width="112" height="112" alt="DrawE logo" />
+  </a>
+</p>
 
-基于 **Vue 3** 的 **插画空状态** 组件：**`<DrawEmpty>`** 上图下文一体编排；底层 **`<UndrawImg>`** 按需加载本地 **unDraw** 风格 SVG，并支持 **`accentColor`** 换色与 **`createDrawEmptyPlugin`** 全局注册。
+<h1 align="center">DrawE · draw-empty</h1>
+
+基于 **Vue 3** 的 **插画空状态** 组件：**`<DrawEmpty>`** 上图下文一体编排；底层 **`<UndrawImg>`** 按需加载本地 **unDraw** 风格 SVG。**插图主色**可与产品对齐：在模板里写 **`accent-color="#2563EB"`**（或 **`accentColor`**），或用 **`createDrawEmptyPlugin`** 一次设好全局默认。
 
 [![Vue 3](https://img.shields.io/badge/Vue-3-42b883?style=flat-square)](https://vuejs.org/)
 [![VitePress](https://img.shields.io/badge/VitePress-文档站-646CFF?style=flat-square)](https://vitepress.dev/)
@@ -9,7 +15,7 @@
 [![License MIT](https://img.shields.io/badge/License-MIT-9cf?style=flat-square)](https://opensource.org/licenses/MIT)
 [![Version](https://img.shields.io/badge/version-0.1.0-666?style=flat-square)](./docs/guide/changelog.md)
 
-| [在线文档（GitHub Pages）](https://yujunok.github.io/draw-empty/) | [更新日志](./docs/guide/changelog.md) | [Releases](https://github.com/yuJunOk/draw-empty/releases) | [npm 依赖接入](./docs/guide/npm.md) | [组件 API / Demo](./docs/components/draw-empty.md) |
+| [在线文档（GitHub Pages）](https://yujunok.github.io/draw-empty/) | [更新日志](./docs/guide/changelog.md) | [Releases](https://github.com/yuJunOk/draw-empty/releases) | [安装与接入](./docs/guide/install.md) | [组件 API / Demo](./docs/components/draw-empty.md) |
 | :--: | :--: | :--: | :--: | :--: |
 
 ---
@@ -18,15 +24,15 @@
 
 - 专为 **留白 / 空列表 / 无数据** 场景设计的 **`<DrawEmpty>`**，支持标题、描述、默认插槽、`#extra`、`#image`
 - **`<UndrawImg>`** 单独使用亦可；插图来自仓库内 **`src/assets/undraw-illustrations/*.svg`**
-- **`accentColor` / `accent-color`**：HEX 替换 SVG 中的常见演示色；可通过 **`createDrawEmptyPlugin({ accentColor })`** 全局注入
-- 附带 **VitePress** 文档站：指南、npm 说明、可运行 Demo、插图浏览页
-- 当前 npm 包以 **`src/` 源码**分发（`.vue` + 资源），业务侧需 **Vite / vue-loader** 等可编译 SFC 的工具链
+- **插图主色**：传入形如 **`#2563EB`** 的颜色值，会把 SVG 里默认的蓝 / 紫等演示色换成你的品牌色；也可通过 **`createDrawEmptyPlugin({ accentColor })`** 设全局默认（属性名 **`accent-color` / `accentColor`**）
+- 附带 **VitePress** 文档站：指南、安装说明、可运行 Demo、插图浏览
+- 当前包以 **`src/` 源码**分发（`.vue` + 资源），业务项目需能用 **Vite** 或 **webpack + vue-loader** 等工具编译 **Vue 单文件组件（`.vue`）**
 
 ---
 
 ## 安装
 
-本仓库通过 **GitHub Release**、**Git 依赖** 或 **本地 `.tgz` / 路径** 分发即可；**`package.json` 中的 `private: true`** 表示**不以 npm 公共 registry 为主要安装来源**。安装命令与本地验证方式见 [**docs/guide/npm.md**](./docs/guide/npm.md)。
+本仓库通过 **GitHub Release**、**Git 依赖** 或 **本地 `.tgz` / 路径** 分发即可；**`package.json` 中的 `private: true`** 表示**不以 npm 公共 registry 为主要安装来源**。安装命令与接入说明见 [**docs/guide/install.md**](./docs/guide/install.md)。
 
 **从 Release 安装 `.tgz`（示例版本 `v0.1.0`，请按实际 Release 替换）：**
 
@@ -101,7 +107,7 @@ npm run build    # 产物 docs/.vitepress/dist/
 npm run preview
 ```
 
-**GitHub Pages**：仓库 **Settings → Pages → Source** 选择 **GitHub Actions**，推送 **`main` / `master`** 后由工作流发布；子路径 **`VITEPRESS_BASE`** 与故障排查见 [**DEVELOPMENT.md §5**](./DEVELOPMENT.md)。
+**GitHub Pages**：仓库 **Settings → Pages → Source** 选择 **GitHub Actions**，推送 **`main` / `master`** 后由工作流发布。站点若在 **`https://用户名.github.io/仓库名/`** 这类子路径下，构建时需设置环境变量 **`VITEPRESS_BASE`**（详见 [**DEVELOPMENT.md §5**](./DEVELOPMENT.md)）。
 
 ---
 

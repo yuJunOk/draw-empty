@@ -18,14 +18,14 @@ outline: deep
 **组件（Vue 3）**
 
 - **`DrawEmpty`**：插画空状态——插图（unDraw 风格 SVG）、标题、描述、默认插槽（主操作）、**`#extra`**、**`#image`** 完全自定义。
-- **`UndrawImg`**：按需加载 **`src/assets/undraw-illustrations/*.svg`**（`import.meta.glob` + `?raw`），可单独使用。
-- **`accentColor` / `accent-color`**：HEX 替换 SVG 中常见演示色；可通过 **`createDrawEmptyPlugin({ accentColor })`** 全局注入。
+- **`UndrawImg`**：按需加载包内 **`src/assets/undraw-illustrations/*.svg`**，可单独使用。
+- **插图主色**：属性 **`accent-color` / `accentColor`** 传入 **`#RRGGBB`** 以统一 SVG 配色；**`createDrawEmptyPlugin({ accentColor })`** 可设应用级默认。
 
 **插件与导出**
 
-- **`createDrawEmptyPlugin`**：全局注册 **`DrawEmpty`**、**`UndrawImg`**；可选 **`accentColor`**。
-- **`drawEmptyDefaultAccentKey`**：与插件配套的 `provide` / `inject` 键（进阶用法）。
-- 入口：**`src/index.ts`**（`exports` 指向源码；业务侧需能编译 `.vue`）。
+- **`createDrawEmptyPlugin`**：全局注册 **`DrawEmpty`**、**`UndrawImg`**；可选默认插图主色 **`accentColor`**。
+- **`drawEmptyDefaultAccentKey`**：与插件配套的主色注入键（进阶，多数项目不需要直接碰）。
+- 入口：**`src/index.ts`**（发布形态为源码；业务项目需能编译 **`.vue`**）。
 
 **资源与工具**
 
@@ -35,12 +35,12 @@ outline: deep
 
 **文档站（VitePress）**
 
-- 指南（介绍、快速开始、**npm 接入**）、组件文档（API + Demo + **`?raw`** 同源示例）、插图资源浏览页。
+- 指南（介绍、快速开始、**安装与接入**）、组件文档（API + Demo + **`?raw`** 同源示例）、插图资源浏览；维护说明单独折叠为附录。
 
 **分发说明**
 
 - **`peerDependencies`**：**`vue ^3.4.0`**。
-- 仓库 **`private: true`** 时不适合 **`npm publish`**；对外发包前需解除 **`private`** 并遵循 [**npm 指南](./npm.md)**。
+- 主要分发方式：**GitHub Release**、**Git**、**本地 `.tgz`**；详见当前文档 **[安装与接入](./install.md)**。
 
 ### 破坏性变更
 

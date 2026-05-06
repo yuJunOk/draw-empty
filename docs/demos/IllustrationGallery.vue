@@ -4,6 +4,7 @@
  * 以无标题、无描述的 DrawEmpty 预览；支持搜索与复制用法代码。
  */
 import { computed, ref, watch } from 'vue'
+import { withBase } from 'vitepress'
 import DrawEmpty from '@draw-empty/components/DrawEmpty.vue'
 
 /** 单页卡片数：减小可同时挂载的 SVG DOM，缓解大图鉴卡顿 */
@@ -120,8 +121,9 @@ async function copyCode(name: string) {
     </div>
 
     <p v-if="allSlugs.length === 0" class="igl__empty-hint">
-      暂无插图文件。请在项目根目录执行 <code>npm run prepare:undraw</code> 或
-      <code>npm run prepare:undraw:all</code> 后再打开本页。
+      暂无插图文件。若在<strong>本地维护文档站</strong>，请先按
+      <a :href="withBase('/guide/maintainer-note')">仓库与文档站维护</a>
+      中的说明拉取插图后再打开本页。
     </p>
 
     <p v-else-if="filteredSlugs.length === 0" class="igl__empty-hint">

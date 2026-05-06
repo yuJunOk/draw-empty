@@ -14,7 +14,7 @@
 - **尽量拉全库（耗时长、体积大）**：**`npm run prepare:undraw:all`**（可加 **`--force`**、**`--concurrency N`** 等，脚本 `--help` 或见 DEVELOPMENT）  
 - **自备 SVG**：直接放进 **`src/assets/undraw-illustrations/`**，命名规则同上，组件里 **`illustration` / UndrawImg `name`** 填**不带后缀**的标题字符串  
 
-组件是从目录里 **`import.meta.glob`** 读图的；没有文件就会空白，所以文档站 / Demo 前先 **`prepare:undraw`** 至少跑一次。
+组件在**构建时**会扫描 **`undraw-illustrations`** 目录里的 **`.svg`** 并打包进去；目录为空则页面上没有图，所以本地跑文档站 / Demo 前请先 **`prepare:undraw`** 至少一次（或保证目录里已有图）。
 
 ---
 
